@@ -1,0 +1,45 @@
+CREATE DATABASE bd_carro;
+
+USE bd_carro;
+
+CREATE TABLE Producto(
+	id_prod INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(600) NOT NULL,
+    precio DOUBLE(8,2) NOT NULL,
+    imagen VARCHAR(200) NULL
+);
+
+CREATE TABLE Cliente(
+	  id_cli INT PRIMARY KEY AUTO_INCREMENT,
+    nombres VARCHAR(150) NOT NULL,
+    apellidos VARCHAR(150) NOT NULL,
+    telefono VARCHAR(15) NULL,
+    correo VARCHAR(130) UNIQUE NOT NULL,
+    password VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE Pedido(
+	id_ped INT PRIMARY KEY AUTO_INCREMENT,
+    id_cli INT NOT NULL,
+    fecha_ped DATETIME NOT NULL,
+    total DECIMAL(8,2) NOT NULL,
+    estado VARCHAR(60),
+    FOREIGN KEY(id_cli) REFERENCES Cliente(id_cli)
+);
+
+CREATE TABLE Detalle_Pedido(
+	id_detalle_ped INT PRIMARY KEY AUTO_INCREMENT,
+    id_ped INT NOT NULL,
+    id_prod INT NOT NULL,
+    precio DOUBLE(8,2) NOT NULL,
+    cantidad INT NOT NULL,
+    FOREIGN KEY(id_ped) REFERENCES Pedido(id_ped),
+    FOREIGN KEY(id_prod) REFERENCES Producto(id_prod)
+);
+
+
+INSERT INTO Producto(nombre,precio,imagen) VALUES('FinePix Pro2 3D Camera 3DcAM01 ',3500 ,'camara.png');
+INSERT INTO Producto(nombre,precio,imagen) VALUES('EXP Portable Hard Drive USB02',' 2500' ,'hdd.png');
+INSERT INTO Producto(nombre,precio,imagen) VALUES('Laptop Gamer Legión 5I Intel Core 5 11400H 8Gb 512Gb Ssd RTX3060 6Gb 15.6" FHD',3899,'laptopgamer.png');
+INSERT INTO Producto(nombre,precio,imagen) VALUES('XP 1155 Intel Core Laptop LPN45', ' 5400','laptopdell.png');
+INSERT INTO Producto(nombre,precio,imagen) VALUES('Luxury Ultra thin Wrist Watch wristWear03 ', '3800','relojluriux.png');
